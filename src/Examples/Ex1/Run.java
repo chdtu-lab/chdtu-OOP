@@ -2,13 +2,10 @@ package Examples.Ex1;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by andriy on 20.02.17.
- */
 public class Run extends JFrame{
 
-    JLabel l;
-    JTextField field;
+    private JLabel l;
+    private JTextField field;
 
     private Run(String title){
         super(title);

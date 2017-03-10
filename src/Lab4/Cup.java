@@ -2,12 +2,19 @@ package Lab4;
 
 public class Cup {
     private String material;
-    private Double roominess;
+    private int roominess;
     private String color;
-    private String substance;
-    private Double occupancy;
+    private double price;
 
-    public String getMaterial() {
+
+    Cup(String m,  int r, String c, double p){
+        this.material = m;
+        this.roominess = r;
+        this.color = c;
+        this.price = p;
+    }
+
+    String getMaterial() {
         return material;
     }
 
@@ -15,15 +22,15 @@ public class Cup {
         this.material = material;
     }
 
-    public Double getRoominess() {
+    int getRoominess() {
         return roominess;
     }
 
-    public void setRoominess(Double roominess) {
+    public void setRoominess(int roominess) {
         this.roominess = roominess;
     }
 
-    public String getColor() {
+    String getColor() {
         return color;
     }
 
@@ -31,21 +38,11 @@ public class Cup {
         this.color = color;
     }
 
-    public String getSubstance() {
-        return substance;
+    Double getPrice() {
+        return price;
     }
 
-    public void setSubstance(String substance) {
-        this.substance = substance;
+    public void setPrice(Double price) {
+        this.price = price;
     }
-
-    public Double getOccupancy() {
-        return occupancy;
-    }
-
-    public void setOccupancy(Double occupancy) {
-        this.occupancy = occupancy;
-    }
-
-
 }
