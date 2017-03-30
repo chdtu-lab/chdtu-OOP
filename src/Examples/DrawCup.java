@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.QuadCurve2D;
+import java.awt.geom.Rectangle2D;
 
 // the four tools things we'll use to draw
 
@@ -61,6 +63,21 @@ public class DrawCup extends JFrame{
         topAndBottom.moveTo(200,400);
         topAndBottom.lineTo(400,400); // bottom of cup
 
+
+//        QuadCurve2D q = new QuadCurve2D.Float();
+        // draw QuadCurve2D.Float with set coordinates
+//        q.setCurve(100, 100, 200, 200, 300, 100);
+//        g2.draw(q);
+
+//        g.setColor(Color.RED);
+//        g.fillOval(35, 45, 75, 95);
+
+//        g2.setPaint(Color.red);
+//        g2.fill(new Rectangle2D.Double(20, 20,100, 100));
+
+        g.setColor(Color.BLUE);
+        Shape s = new QuadCurve2D.Double (50,50, 25, 78, 50 , 50);
+        ((Graphics2D) g).draw(s);
 
         g2.draw(leftSide);
 
