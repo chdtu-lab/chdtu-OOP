@@ -1,11 +1,10 @@
 package Examples;
 
+import com.sun.javafx.geom.Path2D;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.QuadCurve2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.*;
 
 // the four tools things we'll use to draw
 
@@ -64,13 +63,15 @@ public class DrawCup extends JFrame{
         topAndBottom.lineTo(400,400); // bottom of cup
 
 
+
+////        кривая
 //        QuadCurve2D q = new QuadCurve2D.Float();
-        // draw QuadCurve2D.Float with set coordinates
+////         draw QuadCurve2D.Float with set coordinates
 //        q.setCurve(100, 100, 200, 200, 300, 100);
 //        g2.draw(q);
 
-//        g.setColor(Color.RED);
-//        g.fillOval(35, 45, 75, 95);
+        g.setColor(Color.RED);
+        g.fillOval(35, 45, 75, 95);
 
 //        g2.setPaint(Color.red);
 //        g2.fill(new Rectangle2D.Double(20, 20,100, 100));
@@ -88,7 +89,24 @@ public class DrawCup extends JFrame{
         g2.draw(topAndBottom);
 
 
-        g2.drawString("A coffee cup, by Phill Conrad", 20,20);
+        g2.setStroke(new BasicStroke(1.0f));
+        g2.setColor(Color.BLUE);
+
+        // Build the triangle
+        Path2D path = new Path2D();
+        path.moveTo(100,100);
+        path.lineTo(200,100);
+        path.lineTo(150, 50);
+        path.closePath();
+
+        // Draw the triangle
+//        g2.draw(path);
+
+        // Fill the triangle, with a different color
+//        g.setColor(Color.CYAN);
+//        g.fill(path);
+
+//        g2.drawString("A coffee cup, by Phill Conrad", 20,20);
     }
 
     public static void main(String[] args) {
