@@ -122,7 +122,7 @@ public class Run extends JFrame {
     }
 
     public static void main(String[] args) {
-        Frame frame = new Run("Обчислення Кылькості великих та малих букв");
+        Frame frame = new Run("Наслыдування");
         frame.setVisible(true);
     }
 }
