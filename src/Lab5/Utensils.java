@@ -8,6 +8,7 @@ public class Utensils extends JComponent {
 
     private String material;
     private String color;
+    private String all;
     private int roominess;
 
     Utensils(String m, String c, int r){
@@ -62,6 +63,13 @@ public class Utensils extends JComponent {
 
     String getColor() {
         return color;
+    }
+
+    String getAll() {
+        all = "Матеріал чашки " + material + "\n" +
+                "Обем чашки " + roominess + "\n" +
+                "Колір чашки " + color + "\n";
+        return all;
     }
 
     public void setColor(String color) {

@@ -1,16 +1,29 @@
 package Lab5;
 
 
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Run extends JFrame {
+    private Cup c;
+    private Utensils utensils;
+
+    private String material;
+    private int roominess;
+    private String color;
+    private double price;
+
     private JComboBox materialbox, colorbox;
-    private JRadioButton rb1, rb2, rb3;
     private JTextField priceField = new JTextField(10);
     private JButton createCup;
+    private JButton updateCup;
+    private JButton getInfo;
+    private ButtonGroup g = new ButtonGroup();
     private JTextArea textArea=new JTextArea(5,30);
 
     private Run(String title){
@@ -29,11 +42,13 @@ public class Run extends JFrame {
         JLabel colorLabel = new JLabel("Оберіть колір чашки");
         JLabel priceLabel = new JLabel("Ціна чашки");
         createCup = new JButton("Створити чашку");
+        updateCup = new JButton("Оновити данні");
+        getInfo = new JButton("Отримати нформацію");
 
-        rb1 = new JRadioButton("2");
-        rb2 = new JRadioButton("3");
-        rb3 = new JRadioButton("4");
-        ButtonGroup g = new ButtonGroup();
+        JRadioButton rb1 = new JRadioButton("2");
+        JRadioButton rb2 = new JRadioButton("3");
+        JRadioButton rb3 = new JRadioButton("4");
+
         g.add(rb1);
         g.add(rb2);
         g.add(rb3);
@@ -60,6 +75,8 @@ public class Run extends JFrame {
         JPanel bb = new JPanel();
         bb.setLayout(new GridLayout(0, 2));
         bb.add(createCup);
+        bb.add(updateCup);
+        bb.add(getInfo);
         bb.add(textArea);
         add(bb, BorderLayout.SOUTH);
         textArea.setLineWrap(true);
@@ -71,58 +88,85 @@ public class Run extends JFrame {
         rb3.addActionListener(fh);
         colorbox.addActionListener(fh);
         createCup.addActionListener(fh);
+        updateCup.addActionListener(fh);
+        getInfo.addActionListener(fh);
     }
 
+    public String getMaterial() {
+        return (String) materialbox.getSelectedItem();
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public int getRoominess() {
+        for (Enumeration<AbstractButton> buttons = g.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                return Integer.parseInt(button.getText());
+            }
+        }
+        return 1;
+    }
+
+    public void setRoominess(int roominess) {
+        this.roominess = roominess;
+    }
+
+    public String getColor() {
+        return (String) colorbox.getSelectedItem();
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getPrice() {
+        return Double.parseDouble(priceField.getText());
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+
     class Handler implements ActionListener {
-        Cup c;
-        String material;
-        int roominess;
-        String color;
-        double price;
-        boolean vis = false;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            if (e.getSource() == materialbox) {
-                material = (String) materialbox.getSelectedItem();
-            }
-            if (e.getSource() == rb1) {
-                roominess = Integer.parseInt(rb1.getText());
-            }
-            if (e.getSource() == rb2) {
-                roominess = Integer.parseInt(rb2.getText());
-            }
-            if (e.getSource() == rb3) {
-                roominess = Integer.parseInt(rb3.getText());
-            }
-            if (e.getSource() == colorbox) {
-                color = (String) colorbox.getSelectedItem();
-            }
             if (e.getSource() == createCup) {
-                price = Double.parseDouble(priceField.getText());
+                material = getMaterial();
+                color = getColor();
+                price = getPrice();
+                roominess = getRoominess();
+                System.out.println(roominess);
 
-                if (c == null){
-                    c = new Cup(material, roominess, color, price);
-                    Run.this.add(c);
-                }else {
+                if (c != null){
                     Run.this.remove(c);
-                    c = new Cup(material, roominess, color, price);
-                    Run.this.add(c);
                 }
+                c = new Cup(material, roominess, color, price);
+                Run.this.add(c);
 
-                textArea.setText("");
-                textArea.append("Створена чашка " + "\n");
-                textArea.append("Матеріал чашки " + c.getMaterial() + "\n");
-                textArea.append("Обем чашки " + c.getRoominess() + "\n");
-                textArea.append("Колір чашки " + c.getColor() + "\n");
-                textArea.append("Ціна чашки " + c.getPrice() + "\n");
+//                textArea.setText(c.getAll());
+            }
+
+            if (e.getSource() == updateCup) {
+                c.setMaterial(getMaterial());
+                c.setRoominess(getRoominess());
+                c.setColor(getColor());
+                c.setPrice(getPrice());
+
+//                textArea.setText(c.getAll());
+            }
+            if (e.getSource() == getInfo) {
+                textArea.setText(c.getAll());
             }
         }
     }
 
     public static void main(String[] args) {
-        Frame frame = new Run("Наслыдування");
+        Run frame = new Run("Наслыдування");
         frame.setVisible(true);
     }
 }

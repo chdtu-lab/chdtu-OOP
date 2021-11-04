@@ -8,6 +8,11 @@ public class Cup extends Utensils {
         this.price = p;
     }
 
+    String getAll(){
+        String s = super.getAll();
+        return s + price +'\n';
+    }
+
     Double getPrice() {
         return price;
     }
